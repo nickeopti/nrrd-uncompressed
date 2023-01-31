@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nrrdu"
+version = "1.0.0"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "pydantic",
+    "pynrrd",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = false

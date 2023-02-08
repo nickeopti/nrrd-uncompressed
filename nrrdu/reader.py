@@ -1,3 +1,5 @@
+from typing import Optional
+
 import nrrd.reader
 import numpy as np
 import pydantic
@@ -18,12 +20,12 @@ def read_header(file: str) -> NRRDHeaderFields:
     header: list[str] = []
     with open(file, 'rb') as f:
         for line in f:
-            line = line.decode('ascii', 'ignore').rstrip()
+            decoded_line = line.decode('ascii', 'ignore').rstrip()
 
-            if line == '':
+            if decoded_line == '':
                 break
 
-            header.append(line)
+            header.append(decoded_line)
 
     fields = {
         line.split(':', 1)[0].strip(): line.split(':', 1)[1].strip()
@@ -42,7 +44,7 @@ def read_binary_data(file: str, header: NRRDHeaderFields) -> np.ndarray:
     return data
 
 
-def read(header_file: str, data_file: str = None) -> np.ndarray:
+def read(header_file: str, data_file: Optional[str] = None) -> np.ndarray:
     if not data_file:
         data_file = f'{header_file}.b'
 

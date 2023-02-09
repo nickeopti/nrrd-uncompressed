@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Tuple
 
 import nrrd.reader
 import numpy as np
@@ -7,7 +7,7 @@ import pydantic
 
 class NRRDHeaderFields(pydantic.BaseModel):
     type: str
-    sizes: tuple[int, ...]
+    sizes: Tuple[int, ...]
 
     @pydantic.validator('sizes', pre=True)
     def split_sizes(cls, v):
